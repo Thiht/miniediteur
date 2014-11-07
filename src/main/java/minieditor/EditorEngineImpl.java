@@ -47,6 +47,11 @@ public class EditorEngineImpl implements EditorEngine {
 		setCursor(selectionStart + text.length());
 	}
 
+	@Override
+	public String getContent() {
+		return buffer.toString();
+	}
+
 	/**
 		* Selects the text from <code>start</code> (inclusive) to
 		* <code>end</code> (exclusive)

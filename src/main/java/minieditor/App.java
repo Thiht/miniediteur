@@ -19,10 +19,12 @@ public class App {
 	}
 
 	private void configureCommands() {
+		invoker.addCommand("p", new Print(receiver, invoker));
 		invoker.addCommand("i", new InsertText(receiver, invoker));
+		invoker.addCommand("s", new ChangeSelection(receiver, invoker));
 		invoker.addCommand("x", new Cut(receiver));
 		invoker.addCommand("c", new Copy(receiver));
-		invoker.addCommand("p", new Paste(receiver));
+		invoker.addCommand("v", new Paste(receiver));
 		invoker.addCommand("q", new Command() {
 			@Override
 			public void execute() {

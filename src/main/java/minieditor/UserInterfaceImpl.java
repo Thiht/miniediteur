@@ -14,7 +14,7 @@ public class UserInterfaceImpl implements UserInterface {
 
 	private HashMap<String, Command> commands = new HashMap<>();
 	private Scanner in;
-	private boolean terminate = false;
+	private boolean terminate = true;
 
 	public UserInterfaceImpl() {
 		this(System.in);
@@ -33,7 +33,7 @@ public class UserInterfaceImpl implements UserInterface {
 		terminate = false;
 		while (!terminate) {
 			String userInput = null;
-			System.out.print("Entrez une commande a executer : ");
+			System.out.print("Write a command to run (write nothing to stop): ");
 			userInput = in.nextLine();
 			if (userInput == null) {
 				terminate = true;
@@ -46,6 +46,34 @@ public class UserInterfaceImpl implements UserInterface {
 			}
 		}
 		in.close();
+	}
+
+	@Override
+	public String getTextToInsert() {
+		return prompt("Write some text to insert: ");
+	}
+
+	@Override
+	public int getSelectionStart() {
+		return Integer.parseInt(prompt("Beginning of the selection: "));
+	}
+
+	@Override
+	public int getSelectionEnd() {
+		return Integer.parseInt(prompt("End of the selection: "));
+	}
+
+	private String prompt(String promptMessage) {
+		if (terminate) {
+			throw new IllegalStateException("You must call the runInvokerLoop() method before calling this function");
+		}
+		System.out.print(promptMessage);
+		return in.nextLine();
+	}
+
+	@Override
+	public void print(String text) {
+		System.out.println(text);
 	}
 
 	@Override

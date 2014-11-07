@@ -3,19 +3,20 @@ package minieditor.commands;
 import minieditor.EditorEngine;
 import minieditor.UserInterface;
 
-public class InsertText implements Command {
+public class ChangeSelection implements Command {
 
 	private EditorEngine receiver;
 	private UserInterface invoker;
 
-	public InsertText(EditorEngine receiver, UserInterface invoker) {
+	public ChangeSelection(EditorEngine receiver, UserInterface invoker) {
 		this.receiver = receiver;
 		this.invoker  = invoker;
 	}
 
 	@Override
 	public void execute() {
-		String toInsert = invoker.getTextToInsert();
-		receiver.insertText(toInsert);
+		int beg = invoker.getSelectionStart();
+		int end = invoker.getSelectionEnd();
+		receiver.changeSelection(beg, end);
 	}
 }

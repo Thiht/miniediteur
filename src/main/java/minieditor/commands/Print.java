@@ -3,19 +3,19 @@ package minieditor.commands;
 import minieditor.EditorEngine;
 import minieditor.UserInterface;
 
-public class InsertText implements Command {
+public class Print implements Command {
 
 	private EditorEngine receiver;
 	private UserInterface invoker;
 
-	public InsertText(EditorEngine receiver, UserInterface invoker) {
+	public Print(EditorEngine receiver, UserInterface invoker) {
 		this.receiver = receiver;
 		this.invoker  = invoker;
 	}
 
 	@Override
 	public void execute() {
-		String toInsert = invoker.getTextToInsert();
-		receiver.insertText(toInsert);
+		String toPrint = receiver.getContent();
+		invoker.print(toPrint);
 	}
 }
