@@ -26,7 +26,7 @@ public class App {
 		invoker.addCommand("q", new Command() {
 			@Override
 			public void execute() {
-				invoker.terminate()
+				invoker.terminate();
 			}
 		});
 	}

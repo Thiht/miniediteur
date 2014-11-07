@@ -1,6 +1,7 @@
 package minieditor;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class UserInterfaceImpl implements UserInterface {
 		in = new Scanner(inputStream);
 	}
 
-	public UserInterfaceImpl(File file) {
+	public UserInterfaceImpl(File file) throws FileNotFoundException {
 		in = new Scanner(file);
 	}
 
@@ -45,12 +46,6 @@ public class UserInterfaceImpl implements UserInterface {
 			}
 		}
 		in.close();
-	}
-
-	@Override
-	public String getTextToInsert() {
-		System.out.print("Saisissez le texte a inserer : ");
-		in.nextLine();
 	}
 
 	@Override

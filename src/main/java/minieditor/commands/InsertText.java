@@ -15,7 +15,8 @@ public class InsertText implements Command {
 
 	@Override
 	public void execute() {
-		String toInsert = invoker.getTextToInsert();
+		// TODO
+		String toInsert = "";
 		receiver.insertText(toInsert);
 	}
 }
