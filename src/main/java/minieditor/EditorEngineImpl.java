@@ -73,7 +73,7 @@ public class EditorEngineImpl implements EditorEngine {
 
 	/**
 		* Set a cursor (selection of size 0) to <code>position</code>
-		* @param position
+		* @param position The position we want to set the cursor to
 	*/
 	private void setCursor(int position) {
 		changeSelection(position, position);

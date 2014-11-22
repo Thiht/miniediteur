@@ -3,8 +3,8 @@ package minieditor;
 import minieditor.commands.*;
 
 public class App {
-	private UserInterface invoker;
-	private EditorEngine receiver;
+	private UserInterface invoker = new UserInterfaceImpl(System.in);
+	private EditorEngine receiver = new EditorEngineImpl();
 
 	public static void main(String[] args) {
 		App app = new App();
@@ -12,8 +12,6 @@ public class App {
 	}
 
 	private void run() {
-		invoker  = new UserInterfaceImpl(System.in);
-		receiver = new EditorEngineImpl();
 		configureCommands();
 		invoker.runInvokerLoop();
 	}
@@ -25,11 +23,6 @@ public class App {
 		invoker.addCommand("x", new Cut(receiver));
 		invoker.addCommand("c", new Copy(receiver));
 		invoker.addCommand("v", new Paste(receiver));
-		invoker.addCommand("q", new Command() {
-			@Override
-			public void execute() {
-				invoker.terminate();
-			}
-		});
+		invoker.addCommand("q", invoker::terminate);
 	}
 }
