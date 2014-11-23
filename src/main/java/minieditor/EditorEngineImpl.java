@@ -52,6 +52,21 @@ public class EditorEngineImpl implements EditorEngine {
 		return buffer.toString();
 	}
 
+	@Override
+	public String getClipboard() {
+		return clipboard;
+	}
+
+	@Override
+	public int getSelectionStart() {
+		return selectionStart;
+	}
+
+	@Override
+	public int getSelectionEnd() {
+		return selectionEnd;
+	}
+
 	/**
 		* Selects the text from <code>start</code> (inclusive) to
 		* <code>end</code> (exclusive)
