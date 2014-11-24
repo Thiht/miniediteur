@@ -1,10 +1,15 @@
 package minieditor.commands;
 
 import minieditor.EditorEngine;
+import minieditor.Memento;
 
-public class Copy implements Command {
+/**
+ * Concrete command of the Command design pattern.
+ * Originator of the Memento design pattern.
+ */
+public class Copy implements RecordableCommand {
 
-	private EditorEngine receiver;
+	private final EditorEngine receiver;
 
 	public Copy(EditorEngine receiver) {
 		this.receiver = receiver;
@@ -13,5 +18,20 @@ public class Copy implements Command {
 	@Override
 	public void execute() {
 		receiver.copy();
+		receiver.record(this);
+	}
+
+	@Override
+	public Memento getMemento() {
+		return new CopyMemento();
+	}
+
+	@Override
+	public void setMemento(Memento memento) {
+		// Do nothing
+	}
+
+	private class CopyMemento implements Memento {
+
 	}
 }

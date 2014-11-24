@@ -1,12 +1,16 @@
 package minieditor.commands;
 
 import minieditor.EditorEngine;
+import minieditor.Memento;
 import minieditor.UserInterface;
 
-public class ChangeSelection implements Command {
+public class ChangeSelection implements RecordableCommand {
 
-	private EditorEngine receiver;
-	private UserInterface invoker;
+	private final EditorEngine receiver;
+	private final UserInterface invoker;
+	private int selectionStart;
+	private int selectionEnd;
+	private ChangeSelectionMemento memento;
 
 	public ChangeSelection(EditorEngine receiver, UserInterface invoker) {
 		this.receiver = receiver;
@@ -15,8 +19,44 @@ public class ChangeSelection implements Command {
 
 	@Override
 	public void execute() {
-		int beg = invoker.promptSelectionStart();
-		int end = invoker.promptSelectionEnd();
-		receiver.changeSelection(beg, end);
+		if (memento != null) { // If we're replaying a record
+			selectionStart = memento.getSelectionStart();
+			selectionEnd   = memento.getSelectionEnd();
+			memento = null;
+		}
+		else {
+			selectionStart = invoker.promptSelectionStart();
+			selectionEnd   = invoker.promptSelectionEnd();
+			receiver.record(this);
+		}
+		receiver.changeSelection(selectionStart, selectionEnd);
+	}
+
+	@Override
+	public Memento getMemento() {
+		return new ChangeSelectionMemento(selectionStart, selectionEnd);
+	}
+
+	@Override
+	public void setMemento(Memento memento) {
+		this.memento = (ChangeSelectionMemento) memento;
+	}
+
+	private class ChangeSelectionMemento implements Memento {
+		private final int selectionStart;
+		private final int selectionEnd;
+
+		public ChangeSelectionMemento(int selectionStart, int selectionEnd) {
+			this.selectionStart = selectionStart;
+			this.selectionEnd   = selectionEnd;
+		}
+
+		public int getSelectionStart() {
+			return selectionStart;
+		}
+
+		public int getSelectionEnd() {
+			return selectionEnd;
+		}
 	}
 }

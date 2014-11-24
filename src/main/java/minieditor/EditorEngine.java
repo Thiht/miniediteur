@@ -1,6 +1,6 @@
 package minieditor;
 
-public interface EditorEngine {
+public interface EditorEngine extends Recorder {
 	/**
 	 * Store the selected text to the clipboard, remove it and place
 	 * the cursor at the beginning of the former selection.

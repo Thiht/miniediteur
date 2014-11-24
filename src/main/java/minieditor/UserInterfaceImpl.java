@@ -13,9 +13,9 @@ import minieditor.commands.Command;
 
 public class UserInterfaceImpl implements UserInterface {
 
-	private HashMap<String, Command> commands = new HashMap<>();
-	private Scanner in;
-	private PrintStream out;
+	private final HashMap<String, Command> commands = new HashMap<>();
+	private final Scanner in;
+	private final PrintStream out;
 	private boolean terminate = true;
 
 	/**

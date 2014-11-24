@@ -1,11 +1,14 @@
 package minieditor;
 
+import minieditor.commands.RecordableCommand;
+
 public class EditorEngineImpl implements EditorEngine {
 
-	private StringBuilder buffer = new StringBuilder();
-	private String clipboard     = "";
-	private int selectionStart   = 0; // inclusive
-	private int selectionEnd     = 0; // exclusive
+	private final StringBuilder buffer = new StringBuilder();
+	private String clipboard = "";
+	private int selectionStart = 0; // inclusive
+	private int selectionEnd   = 0; // exclusive
+	private final Recorder recorder = new RecorderImpl();
 
 	/**
 	 * {@inheritDoc}
@@ -109,5 +112,37 @@ public class EditorEngineImpl implements EditorEngine {
 	 */
 	private void setCursor(int position) {
 		changeSelection(position, position);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void startRecording() {
+		recorder.startRecording();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void stopRecording() {
+		recorder.stopRecording();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void record(RecordableCommand command) {
+		recorder.record(command);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void replay() {
+		recorder.replay();
 	}
 }

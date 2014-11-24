@@ -3,8 +3,8 @@ package minieditor;
 import minieditor.commands.*;
 
 public class App {
-	private UserInterface invoker = new UserInterfaceImpl();
-	private EditorEngine receiver = new EditorEngineImpl();
+	private final UserInterface invoker = new UserInterfaceImpl();
+	private final EditorEngine receiver = new EditorEngineImpl();
 
 	public static void main(String[] args) {
 		App app = new App();
