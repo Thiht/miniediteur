@@ -117,13 +117,39 @@ public class EditorEngineImplTest {
     }
 
     @Test
-    public void testChangeSelection() throws Exception {
+    public void testValidChangeSelection() throws Exception {
         final String toInsert       = "Test data sample";
         final int newSelectionStart = 3;
         final int newSelectionEnd   = 5;
         editorEngine.insertText(toInsert);
-        editorEngine.changeSelection(newSelectionStart, 5);
+        editorEngine.changeSelection(newSelectionStart, newSelectionEnd);
         assertEquals(newSelectionStart, editorEngine.getSelectionStart());
         assertEquals(newSelectionEnd, editorEngine.getSelectionEnd());
+    }
+
+    @Test
+    public void testInvalidChangeSelectionNegativeStartOutOfBondsEnd() throws Exception {
+        final String toInsert            = "Test data sample";
+        final int newSelectionStart      = -8;
+        final int newSelectionEnd        = 25;
+        final int expectedSelectionStart = 0;
+        final int expectedSelectionEnd   = toInsert.length();
+        editorEngine.insertText(toInsert);
+        editorEngine.changeSelection(newSelectionStart, newSelectionEnd);
+        assertEquals(expectedSelectionStart, editorEngine.getSelectionStart());
+        assertEquals(expectedSelectionEnd, editorEngine.getSelectionEnd());
+    }
+
+    @Test
+    public void testInvalidChangeSelectionStartGreaterThanEnd() throws Exception {
+        final String toInsert            = "Test data sample";
+        final int newSelectionStart      = 5;
+        final int newSelectionEnd        = 3;
+        final int expectedSelectionStart = newSelectionEnd;
+        final int expectedSelectionEnd   = newSelectionStart;
+        editorEngine.insertText(toInsert);
+        editorEngine.changeSelection(newSelectionStart, newSelectionEnd);
+        assertEquals(expectedSelectionStart, editorEngine.getSelectionStart());
+        assertEquals(expectedSelectionEnd, editorEngine.getSelectionEnd());
     }
 }

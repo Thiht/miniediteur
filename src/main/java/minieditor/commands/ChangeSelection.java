@@ -15,8 +15,8 @@ public class ChangeSelection implements Command {
 
 	@Override
 	public void execute() {
-		int beg = invoker.getSelectionStart();
-		int end = invoker.getSelectionEnd();
+		int beg = invoker.promptSelectionStart();
+		int end = invoker.promptSelectionEnd();
 		receiver.changeSelection(beg, end);
 	}
 }
