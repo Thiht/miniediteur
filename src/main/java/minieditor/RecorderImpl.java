@@ -2,12 +2,12 @@ package minieditor;
 
 import minieditor.commands.RecordableCommand;
 
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class RecorderImpl implements Recorder {
     private boolean recording = false;
-    private final SortedMap<Memento, RecordableCommand> commandsToReplay = new TreeMap<>();
+    private final Map<Memento, RecordableCommand> commandsToReplay = new LinkedHashMap<>();
 
     @Override
     public void startRecording() {

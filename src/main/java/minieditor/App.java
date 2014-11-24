@@ -23,6 +23,9 @@ public class App {
 		invoker.addCommand("x", new Cut(receiver));
 		invoker.addCommand("c", new Copy(receiver));
 		invoker.addCommand("v", new Paste(receiver));
+		invoker.addCommand("ms", new StartMacro(receiver));
+		invoker.addCommand("mx", new StopMacro(receiver));
+		invoker.addCommand("mr", new ReplayMacro(receiver));
 		invoker.addCommand("q", invoker::terminate);
 	}
 }

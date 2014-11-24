@@ -13,7 +13,6 @@ public class Print implements RecordableCommand {
 	private final EditorEngine receiver;
 	private final UserInterface invoker;
 	private String toPrint;
-	private PrintMemento memento;
 
 	public Print(EditorEngine receiver, UserInterface invoker) {
 		this.receiver = receiver;
@@ -22,36 +21,22 @@ public class Print implements RecordableCommand {
 
 	@Override
 	public void execute() {
-		if (memento != null) { // If we're replaying a record
-			toPrint = memento.getTextToPrint();
-			memento = null;
-		}
-		else {
-			toPrint = receiver.getContent();
-			receiver.record(this);
-		}
+		toPrint = receiver.getContent();
+		receiver.record(this);
 		invoker.print(toPrint);
 	}
 
 	@Override
 	public Memento getMemento() {
-		return new PrintMemento(toPrint);
+		return new PrintMemento();
 	}
 
 	@Override
 	public void setMemento(Memento memento) {
-		this.memento = (PrintMemento) memento;
+		// Do nothing
 	}
 
 	private class PrintMemento implements Memento {
-		private final String textToPrint;
 
-		public PrintMemento(String textToPrint) {
-			this.textToPrint = textToPrint;
-		}
-
-		public String getTextToPrint() {
-			return textToPrint;
-		}
 	}
 }
