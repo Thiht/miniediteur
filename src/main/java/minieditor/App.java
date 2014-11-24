@@ -3,15 +3,15 @@ package minieditor;
 import minieditor.commands.*;
 
 public class App {
-	private UserInterface invoker = new UserInterfaceImpl(System.in);
+	private UserInterface invoker = new UserInterfaceImpl();
 	private EditorEngine receiver = new EditorEngineImpl();
 
 	public static void main(String[] args) {
 		App app = new App();
-		app.run();
+		app.launch();
 	}
 
-	private void run() {
+	private void launch() {
 		configureCommands();
 		invoker.runInvokerLoop();
 	}

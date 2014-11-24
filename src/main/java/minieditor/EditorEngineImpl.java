@@ -8,9 +8,8 @@ public class EditorEngineImpl implements EditorEngine {
 	private int selectionEnd     = 0; // exclusive
 
 	/**
-		* Store the selected text to the clipboard, remove it and place
-		* the cursor at the beginning of the former selection
-	*/
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void cut() {
 		copy();
@@ -19,27 +18,24 @@ public class EditorEngineImpl implements EditorEngine {
 	}
 
 	/**
-		* Store the selected text to the clipboard
-	*/
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void copy() {
 		clipboard = buffer.substring(selectionStart, selectionEnd);
 	}
 
 	/**
-		* Insert the content of the clipboard instead of the selection and place
-		* the cursor at the end of the insertion
-	*/
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void paste() {
 		insertText(clipboard);
 	}
 
 	/**
-		* Insert text instead of the selection and place the cursor at
-		* the end of the insertion
-		* @param text The text to insert
-	*/
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void insertText(String text) {
 		delete();
@@ -52,44 +48,65 @@ public class EditorEngineImpl implements EditorEngine {
 		return buffer.toString();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getClipboard() {
 		return clipboard;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getSelectionStart() {
 		return selectionStart;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getSelectionEnd() {
 		return selectionEnd;
 	}
 
 	/**
-		* Selects the text from <code>start</code> (inclusive) to
-		* <code>end</code> (exclusive)
-		* @param start The beginning of the selection
-		* @param end The end of the selection
-	*/
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void changeSelection(int start, int end) {
-		selectionStart = Math.min(start, end);
-		selectionEnd   = Math.max(start, end);
+		// Swap start and end if start > end
+		if (start > end) {
+			int tmp = start;
+			start   = end;
+			end     = tmp;
+		}
+
+		if (start < 0) {
+			start = 0;
+		}
+
+		if (end > buffer.length()) {
+			end = buffer.length();
+		}
+
+		selectionStart = start;
+		selectionEnd   = end;
 	}
 
 	/**
-		* Delete the selected text
-	*/
+	 * Delete the selected text.
+	 */
 	private void delete() {
 		buffer.delete(selectionStart, selectionEnd);
 	}
 
 	/**
-		* Set a cursor (selection of size 0) to <code>position</code>
-		* @param position The position we want to set the cursor to
-	*/
+	 * Set a cursor (selection of size 0) to <code>position</code>.
+	 * @param position The position we want to set the cursor to
+	 */
 	private void setCursor(int position) {
 		changeSelection(position, position);
 	}
