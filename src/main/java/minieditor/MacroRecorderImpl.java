@@ -5,7 +5,7 @@ import minieditor.commands.RecordableCommand;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class RecorderImpl implements Recorder {
+public class MacroRecorderImpl implements MacroRecorder {
     private boolean recording = false;
     private final Map<Memento, RecordableCommand> commandsToReplay = new LinkedHashMap<>();
 

@@ -2,13 +2,17 @@ package minieditor;
 
 import minieditor.commands.RecordableCommand;
 
+import java.util.Stack;
+
 public class EditorEngineImpl implements EditorEngine {
 
-	private final StringBuilder buffer = new StringBuilder();
+	private StringBuilder buffer = new StringBuilder();
 	private String clipboard = "";
 	private int selectionStart = 0; // inclusive
 	private int selectionEnd   = 0; // exclusive
-	private final Recorder recorder = new RecorderImpl();
+	private final MacroRecorder macroRecorder = new MacroRecorderImpl();
+	private final Stack<Memento> undo = new Stack<>();
+	private final Stack<Memento> redo = new Stack<>();
 
 	/**
 	 * {@inheritDoc}
@@ -99,6 +103,28 @@ public class EditorEngineImpl implements EditorEngine {
 		selectionEnd   = end;
 	}
 
+	@Override
+	public void save() {
+		// TODO
+		// Appeler cette méthode dans les Commands modificatrices (copy, paste, cut, ...)
+	}
+
+	@Override
+	public void undo() {
+		// TODO: check if m is null
+		Memento m = undo.pop();
+		redo.push(m);
+		setMemento(m);
+	}
+
+	@Override
+	public void redo() {
+		// TODO: check if m is null
+		Memento m = redo.pop();
+		undo.push(m);
+		setMemento(m);
+	}
+
 	/**
 	 * Delete the selected text.
 	 */
@@ -119,7 +145,7 @@ public class EditorEngineImpl implements EditorEngine {
 	 */
 	@Override
 	public void startRecording() {
-		recorder.startRecording();
+		macroRecorder.startRecording();
 	}
 
 	/**
@@ -127,7 +153,7 @@ public class EditorEngineImpl implements EditorEngine {
 	 */
 	@Override
 	public void stopRecording() {
-		recorder.stopRecording();
+		macroRecorder.stopRecording();
 	}
 
 	/**
@@ -135,7 +161,7 @@ public class EditorEngineImpl implements EditorEngine {
 	 */
 	@Override
 	public void record(RecordableCommand command) {
-		recorder.record(command);
+		macroRecorder.record(command);
 	}
 
 	/**
@@ -143,6 +169,52 @@ public class EditorEngineImpl implements EditorEngine {
 	 */
 	@Override
 	public void replay() {
-		recorder.replay();
+		macroRecorder.replay();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Memento getMemento() {
+		return new EditorEngineImplMemento(buffer, clipboard, selectionStart, selectionEnd);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMemento(Memento memento) {
+		// TODO
+	}
+
+	private class EditorEngineImplMemento implements Memento {
+		private final StringBuilder buffer;
+		private final String clipboard;
+		private final int selectionStart;
+		private final int selectionEnd;
+
+		public EditorEngineImplMemento(StringBuilder buffer, String clipboard, int selectionStart, int selectionEnd) {
+			this.buffer         = new StringBuilder(buffer);
+			this.clipboard      = clipboard; // No need to copy because Strings are immutable
+			this.selectionStart = selectionStart;
+			this.selectionEnd   = selectionEnd;
+		}
+
+		public StringBuilder getBuffer() {
+			return buffer;
+		}
+
+		public String getClipboard() {
+			return clipboard;
+		}
+
+		public int getSelectionStart() {
+			return selectionStart;
+		}
+
+		public int getSelectionEnd() {
+			return selectionEnd;
+		}
 	}
 }

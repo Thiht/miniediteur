@@ -1,12 +1,12 @@
 package minieditor.commands;
 
-import minieditor.Recorder;
+import minieditor.MacroRecorder;
 
 public class StopMacro implements Command {
 
-    private final Recorder receiver;
+    private final MacroRecorder receiver;
 
-    public StopMacro(Recorder receiver) {
+    public StopMacro(MacroRecorder receiver) {
         this.receiver = receiver;
     }
 

@@ -1,6 +1,6 @@
 package minieditor;
 
-public interface EditorEngine extends Recorder {
+public interface EditorEngine extends MacroRecorder, Originator {
 	/**
 	 * Store the selected text to the clipboard, remove it and place
 	 * the cursor at the beginning of the former selection.
@@ -62,4 +62,10 @@ public interface EditorEngine extends Recorder {
 	 * @param end The end of the selection
 	 */
 	public void changeSelection(int start, int end);
+
+	public void save();
+
+	public void undo();
+
+	public void redo();
 }

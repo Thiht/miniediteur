@@ -1,12 +1,12 @@
 package minieditor.commands;
 
-import minieditor.Recorder;
+import minieditor.MacroRecorder;
 
 public class ReplayMacro implements Command {
 
-    private final Recorder receiver;
+    private final MacroRecorder receiver;
 
-    public ReplayMacro(Recorder receiver) {
+    public ReplayMacro(MacroRecorder receiver) {
         this.receiver = receiver;
     }
 

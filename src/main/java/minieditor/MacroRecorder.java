@@ -5,7 +5,7 @@ import minieditor.commands.RecordableCommand;
 /**
  * Caretaker of the Memento pattern.
  */
-public interface Recorder {
+public interface MacroRecorder {
     /**
      * Start the recording of a macro. If a macro is already saved, it'll be erased.
      */
