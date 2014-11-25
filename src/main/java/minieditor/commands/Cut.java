@@ -21,17 +21,19 @@ public class Cut implements RecordableCommand {
 		receiver.record(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Memento getMemento() {
-		return new CutMemento();
+		return new Memento() {};
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setMemento(Memento memento) {
 		// Do nothing
-	}
-
-	private class CutMemento implements Memento {
-
 	}
 }

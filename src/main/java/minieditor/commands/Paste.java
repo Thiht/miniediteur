@@ -21,17 +21,19 @@ public class Paste implements RecordableCommand {
 		receiver.record(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Memento getMemento() {
-		return new PasteMemento();
+		return new Memento() {};
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setMemento(Memento memento) {
 		// Do nothing
-	}
-
-	private class PasteMemento implements Memento {
-
 	}
 }

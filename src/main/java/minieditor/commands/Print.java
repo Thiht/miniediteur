@@ -26,17 +26,19 @@ public class Print implements RecordableCommand {
 		invoker.print(toPrint);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Memento getMemento() {
-		return new PrintMemento();
+		return new Memento() {};
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setMemento(Memento memento) {
 		// Do nothing
-	}
-
-	private class PrintMemento implements Memento {
-
 	}
 }

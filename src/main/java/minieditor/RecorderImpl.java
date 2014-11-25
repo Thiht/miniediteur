@@ -9,6 +9,9 @@ public class RecorderImpl implements Recorder {
     private boolean recording = false;
     private final Map<Memento, RecordableCommand> commandsToReplay = new LinkedHashMap<>();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startRecording() {
         if (recording) {
@@ -19,11 +22,17 @@ public class RecorderImpl implements Recorder {
         commandsToReplay.clear();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stopRecording() {
         recording = false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void record(RecordableCommand command) {
         if (recording) {
@@ -31,6 +40,9 @@ public class RecorderImpl implements Recorder {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void replay() {
         if (recording) {

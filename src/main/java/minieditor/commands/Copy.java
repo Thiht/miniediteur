@@ -21,17 +21,19 @@ public class Copy implements RecordableCommand {
 		receiver.record(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Memento getMemento() {
-		return new CopyMemento();
+		return new Memento() {};
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setMemento(Memento memento) {
 		// Do nothing
-	}
-
-	private class CopyMemento implements Memento {
-
 	}
 }

@@ -65,6 +65,7 @@ public class UserInterfaceImpl implements UserInterface {
 				}
 			}
 		}
+
 		in.close();
 	}
 
@@ -92,13 +93,11 @@ public class UserInterfaceImpl implements UserInterface {
 		return Integer.parseInt(prompt("End of the selection: "));
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	private String prompt(String promptMessage) {
 		if (terminate) {
 			throw new IllegalStateException("You must call the runInvokerLoop() method before calling this method");
 		}
+
 		out.print(promptMessage);
 		return in.nextLine();
 	}
@@ -111,6 +110,7 @@ public class UserInterfaceImpl implements UserInterface {
 		if (terminate) {
 			throw new IllegalStateException("You must call the runInvokerLoop() method before calling this method");
 		}
+
 		out.println(text);
 	}
 

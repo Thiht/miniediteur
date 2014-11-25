@@ -33,16 +33,25 @@ public class InsertText implements RecordableCommand {
 		receiver.insertText(toInsert);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Memento getMemento() {
 		return new InsertTextMemento(toInsert);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setMemento(Memento memento) {
 		this.memento = (InsertTextMemento) memento;
 	}
 
+	/**
+	 * Concrete Memento of the Memento design pattern.
+	 */
 	private class InsertTextMemento implements Memento {
 		private final String textToInsert;
 

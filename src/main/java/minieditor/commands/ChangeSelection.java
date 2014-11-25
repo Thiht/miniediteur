@@ -32,16 +32,25 @@ public class ChangeSelection implements RecordableCommand {
 		receiver.changeSelection(selectionStart, selectionEnd);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Memento getMemento() {
 		return new ChangeSelectionMemento(selectionStart, selectionEnd);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setMemento(Memento memento) {
 		this.memento = (ChangeSelectionMemento) memento;
 	}
 
+	/**
+	 * Concrete Memento of the Memento design pattern.
+	 */
 	private class ChangeSelectionMemento implements Memento {
 		private final int selectionStart;
 		private final int selectionEnd;
