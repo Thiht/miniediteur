@@ -188,7 +188,11 @@ public class EditorEngineImpl implements EditorEngine {
 	 */
 	@Override
 	public void setMemento(Memento memento) {
-		// TODO
+		EditorEngineImplMemento m = (EditorEngineImplMemento) memento;
+		buffer         = m.getBuffer();
+		clipboard      = m.getClipboard();
+		selectionStart = m.getSelectionStart();
+		selectionEnd   = m.getSelectionEnd();
 	}
 
 	private class EditorEngineImplMemento implements Memento {
