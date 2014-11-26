@@ -25,6 +25,7 @@ public class ChangeSelection implements RecordableCommand {
 			memento = null;
 		}
 		else {
+			receiver.save();
 			selectionStart = invoker.promptSelectionStart();
 			selectionEnd   = invoker.promptSelectionEnd();
 			receiver.record(this);

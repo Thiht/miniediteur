@@ -17,6 +17,7 @@ public class Paste implements RecordableCommand {
 
 	@Override
 	public void execute() {
+		receiver.save();
 		receiver.paste();
 		receiver.record(this);
 	}

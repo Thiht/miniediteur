@@ -27,6 +27,7 @@ public class InsertText implements RecordableCommand {
 			memento  = null;
 		}
 		else {
+			receiver.save();
 			toInsert = invoker.promptTextToInsert();
 			receiver.record(this);
 		}

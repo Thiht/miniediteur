@@ -17,6 +17,7 @@ public class Copy implements RecordableCommand {
 
 	@Override
 	public void execute() {
+		receiver.save();
 		receiver.copy();
 		receiver.record(this);
 	}

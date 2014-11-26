@@ -26,6 +26,8 @@ public class App {
 		invoker.addCommand("ms", new StartMacro(receiver));
 		invoker.addCommand("mx", new StopMacro(receiver));
 		invoker.addCommand("mr", new ReplayMacro(receiver));
+		invoker.addCommand("z", new Undo(receiver));
+		invoker.addCommand("y", new Redo(receiver));
 		invoker.addCommand("q", invoker::terminate);
 	}
 }

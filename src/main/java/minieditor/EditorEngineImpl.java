@@ -120,7 +120,8 @@ public class EditorEngineImpl implements EditorEngine {
 	public void undo() {
 		if (!undo.empty()) {
 			Memento m = undo.pop();
-			redo.push(m);
+			Memento currentState = getMemento();
+			redo.push(currentState);
 			setMemento(m);
 		}
 	}
@@ -132,7 +133,8 @@ public class EditorEngineImpl implements EditorEngine {
 	public void redo() {
 		if (!redo.empty()) {
 			Memento m = redo.pop();
-			undo.push(m);
+			Memento currentState = getMemento();
+			undo.push(currentState);
 			setMemento(m);
 		}
 	}

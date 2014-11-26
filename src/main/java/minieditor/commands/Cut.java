@@ -17,6 +17,7 @@ public class Cut implements RecordableCommand {
 
 	@Override
 	public void execute() {
+		receiver.save();
 		receiver.cut();
 		receiver.record(this);
 	}
