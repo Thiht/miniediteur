@@ -105,24 +105,27 @@ public class EditorEngineImpl implements EditorEngine {
 
 	@Override
 	public void save() {
-		// TODO
-		// Appeler cette méthode dans les Commands modificatrices (copy, paste, cut, ...)
+		Memento m = getMemento();
+		undo.push(m);
+		redo.clear();
 	}
 
 	@Override
 	public void undo() {
-		// TODO: check if m is null
-		Memento m = undo.pop();
-		redo.push(m);
-		setMemento(m);
+		if (!undo.empty()) {
+			Memento m = undo.pop();
+			redo.push(m);
+			setMemento(m);
+		}
 	}
 
 	@Override
 	public void redo() {
-		// TODO: check if m is null
-		Memento m = redo.pop();
-		undo.push(m);
-		setMemento(m);
+		if (!redo.empty()) {
+			Memento m = redo.pop();
+			undo.push(m);
+			setMemento(m);
+		}
 	}
 
 	/**
