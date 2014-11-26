@@ -12,7 +12,6 @@ public class Print implements RecordableCommand {
 
 	private final EditorEngine receiver;
 	private final UserInterface invoker;
-	private String toPrint;
 
 	public Print(EditorEngine receiver, UserInterface invoker) {
 		this.receiver = receiver;
@@ -21,7 +20,7 @@ public class Print implements RecordableCommand {
 
 	@Override
 	public void execute() {
-		toPrint = receiver.getContent();
+		String toPrint = receiver.getContent();
 		receiver.record(this);
 		invoker.print(toPrint);
 	}
