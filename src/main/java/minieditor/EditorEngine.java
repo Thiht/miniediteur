@@ -63,9 +63,22 @@ public interface EditorEngine extends MacroRecorder, Originator {
 	 */
 	public void changeSelection(int start, int end);
 
+	/**
+	 * Save the current state of this object in order to restore it later. Overwrite the list of saved states to redo.
+	 * @see #undo
+	 * @see #redo
+	 */
 	public void save();
 
+	/**
+	 * Restore this object to the last state it was, and save the current state in order to restore it later.
+	 * @see #redo
+	 */
 	public void undo();
 
+	/**
+	 * Restore this object to the state it was before its previous state being cancelled. It can be undone.
+	 * @see #undo
+	 */
 	public void redo();
 }

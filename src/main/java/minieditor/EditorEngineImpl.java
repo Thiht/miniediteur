@@ -103,6 +103,9 @@ public class EditorEngineImpl implements EditorEngine {
 		selectionEnd   = end;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void save() {
 		Memento m = getMemento();
@@ -110,6 +113,9 @@ public class EditorEngineImpl implements EditorEngine {
 		redo.clear();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void undo() {
 		if (!undo.empty()) {
@@ -119,6 +125,9 @@ public class EditorEngineImpl implements EditorEngine {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void redo() {
 		if (!redo.empty()) {
