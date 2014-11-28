@@ -4,10 +4,8 @@ import minieditor.commands.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class EditorEngineImplTest {
 
@@ -169,6 +167,7 @@ public class EditorEngineImplTest {
         new StopMacro(editorEngine).execute();
         assertEquals(toInsert, editorEngine.getContent());
         new ReplayMacro(editorEngine).execute();
+        verify(userInterfaceMock, times(1)).promptTextToInsert(); // We check `promptTextToInsert` has been called one time only
         assertEquals(toInsert + toInsert, editorEngine.getContent());
     }
 
@@ -181,6 +180,7 @@ public class EditorEngineImplTest {
         new Undo(editorEngine).execute();
         assertEquals("", editorEngine.getContent());
         new Redo(editorEngine).execute();
+        verify(userInterfaceMock, times(1)).promptTextToInsert(); // We check `promptTextToInsert` has been called one time only
         assertEquals(toInsert, editorEngine.getContent());
     }
 }
