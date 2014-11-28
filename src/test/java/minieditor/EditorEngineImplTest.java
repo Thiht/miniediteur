@@ -1,17 +1,23 @@
 package minieditor;
 
+import minieditor.commands.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.*;
 
 public class EditorEngineImplTest {
 
     private EditorEngine editorEngine;
+    private UserInterface userInterfaceMock;
 
     @Before
     public void setUp() {
         editorEngine = new EditorEngineImpl();
+        userInterfaceMock = mock(UserInterface.class);
     }
 
     @Test
@@ -151,5 +157,30 @@ public class EditorEngineImplTest {
         editorEngine.changeSelection(newSelectionStart, newSelectionEnd);
         assertEquals(expectedSelectionStart, editorEngine.getSelectionStart());
         assertEquals(expectedSelectionEnd, editorEngine.getSelectionEnd());
+    }
+
+
+    @Test
+    public void testSampleMacro() throws Exception {
+        final String toInsert = "Test data sample";
+        when(userInterfaceMock.promptTextToInsert()).thenReturn(toInsert);
+        new StartMacro(editorEngine).execute();
+        new InsertText(editorEngine, userInterfaceMock).execute();
+        new StopMacro(editorEngine).execute();
+        assertEquals(toInsert, editorEngine.getContent());
+        new ReplayMacro(editorEngine).execute();
+        assertEquals(toInsert + toInsert, editorEngine.getContent());
+    }
+
+    @Test
+    public void testUndoRedo() throws Exception {
+        final String toInsert = "Test data sample";
+        when(userInterfaceMock.promptTextToInsert()).thenReturn(toInsert);
+        new InsertText(editorEngine, userInterfaceMock).execute();
+        assertEquals(toInsert, editorEngine.getContent());
+        new Undo(editorEngine).execute();
+        assertEquals("", editorEngine.getContent());
+        new Redo(editorEngine).execute();
+        assertEquals(toInsert, editorEngine.getContent());
     }
 }
