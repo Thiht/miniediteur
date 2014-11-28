@@ -1,16 +1,25 @@
 package minieditor;
 
+import minieditor.commands.InsertText;
+import minieditor.commands.ReplayMacro;
+import minieditor.commands.StartMacro;
+import minieditor.commands.StopMacro;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.mockito.Mockito.mock;
+
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 public class EditorEngineImplTest {
 
     private EditorEngine editorEngine;
+    private UserInterface userInterfaceMock;
 
     @Before
     public void setUp() {
+        userInterfaceMock = mock(UserInterface.class);
         editorEngine = new EditorEngineImpl();
     }
 
@@ -151,5 +160,17 @@ public class EditorEngineImplTest {
         editorEngine.changeSelection(newSelectionStart, newSelectionEnd);
         assertEquals(expectedSelectionStart, editorEngine.getSelectionStart());
         assertEquals(expectedSelectionEnd, editorEngine.getSelectionEnd());
+    }
+
+    @Test
+    public void testSampleMacro() throws Exception {
+        final String toInsert = "Test data sample";
+        when(userInterfaceMock.promptTextToInsert()).thenReturn(toInsert);
+        new StartMacro(editorEngine).execute();
+        new InsertText(editorEngine, userInterfaceMock).execute();
+        new StopMacro(editorEngine).execute();
+        assertEquals(toInsert, editorEngine.getContent());
+        new ReplayMacro(editorEngine).execute();
+        assertEquals(toInsert + toInsert, editorEngine.getContent());
     }
 }
