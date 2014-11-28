@@ -73,7 +73,7 @@ public class UserInterfaceImpl implements UserInterface {
 	 */
 	@Override
 	public String promptTextToInsert() {
-		return prompt("Write some text to insert: ");
+		return promptString("Write some text to insert: ");
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class UserInterfaceImpl implements UserInterface {
 	 */
 	@Override
 	public int promptSelectionStart() {
-		return Integer.parseInt(prompt("Beginning of the selection: "));
+		return promptInt("Beginning of the selection: ");
 	}
 
 	/**
@@ -89,18 +89,27 @@ public class UserInterfaceImpl implements UserInterface {
 	 */
 	@Override
 	public int promptSelectionEnd() {
-		return Integer.parseInt(prompt("End of the selection: "));
+		return promptInt("End of the selection: ");
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	private String prompt(String promptMessage) {
+	private void prompt(String promptMessage) {
 		if (terminate) {
 			throw new IllegalStateException("You must call the runInvokerLoop() method before calling this method");
 		}
+
 		out.print(promptMessage);
+	}
+
+	private String promptString(String promptMessage) {
+		prompt(promptMessage);
 		return in.nextLine();
+	}
+
+	private int promptInt(String promptMessage) {
+		prompt(promptMessage);
+		int ret = in.nextInt();
+		in.nextLine(); // Consume the \n character
+		return ret;
 	}
 
 	/**
