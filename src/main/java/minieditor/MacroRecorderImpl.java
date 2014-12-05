@@ -15,7 +15,8 @@ public class MacroRecorderImpl implements MacroRecorder {
     @Override
     public void startRecording() {
         if (recording) {
-            throw new IllegalStateException("Already recording");
+            System.err.println("Already recording");
+            return;
         }
 
         recording = true;
@@ -46,7 +47,8 @@ public class MacroRecorderImpl implements MacroRecorder {
     @Override
     public void replay() {
         if (recording) {
-            throw new IllegalStateException("Impossible to replay while recording");
+            System.err.println("Impossible to replay while recording");
+            return;
         }
 
         for (Memento memento : commandsToReplay.keySet()) {
