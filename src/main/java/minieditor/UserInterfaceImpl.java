@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import java.io.PrintStream;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -107,7 +108,17 @@ public class UserInterfaceImpl implements UserInterface {
 
 	private int promptInt(String promptMessage) {
 		prompt(promptMessage);
-		int ret = in.nextInt();
+		int ret = 0;
+		boolean ok = false;
+		while (!ok) {
+			try {
+				ret = in.nextInt();
+				ok = true;
+			} catch (InputMismatchException e) {
+				prompt("Erreur : entrez un entier : ");
+				in.nextLine();
+			}
+		}
 		in.nextLine(); // Consume the \n character
 		return ret;
 	}
