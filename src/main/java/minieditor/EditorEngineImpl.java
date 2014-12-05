@@ -95,6 +95,14 @@ public class EditorEngineImpl implements EditorEngine {
 			start = 0;
 		}
 
+		if (start > buffer.length()) {
+			start = buffer.length();
+		}
+
+		if (end < 0) {
+			end = 0;
+		}
+
 		if (end > buffer.length()) {
 			end = buffer.length();
 		}
