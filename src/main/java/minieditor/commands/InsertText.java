@@ -5,8 +5,7 @@ import minieditor.Memento;
 import minieditor.UserInterface;
 
 /**
- * Concrete command of the Command design pattern.
- * Originator of the Memento design pattern.
+ * A command allowing to insert some text to an EditorEngine.
  */
 public class InsertText implements RecordableCommand {
 
@@ -20,6 +19,9 @@ public class InsertText implements RecordableCommand {
 		this.invoker  = invoker;
 	}
 
+	/**
+	 * Make the specified UserInterface prompt the use for a text to insert, and insert it to the EditorEngine.
+	 */
 	@Override
 	public void execute() {
 		if (memento != null) { // If we're replaying a record

@@ -4,8 +4,7 @@ import minieditor.EditorEngine;
 import minieditor.Memento;
 
 /**
- * Concrete command of the Command design pattern.
- * Originator of the Memento design pattern.
+ * A command allowing to cut the selected content of an EditorEngine to its clipboard.
  */
 public class Cut implements RecordableCommand {
 
@@ -15,6 +14,9 @@ public class Cut implements RecordableCommand {
 		this.receiver = receiver;
 	}
 
+	/**
+	 * Cut the selected text in the EditorEngine to its clipboard.
+	 */
 	@Override
 	public void execute() {
 		receiver.cut();

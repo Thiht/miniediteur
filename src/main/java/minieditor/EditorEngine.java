@@ -1,5 +1,8 @@
 package minieditor;
 
+/**
+ * The engine allowing to perform the different actions.
+ */
 public interface EditorEngine extends Recorder {
 	/**
 	 * Store the selected text to the clipboard, remove it and place

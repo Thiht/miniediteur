@@ -2,6 +2,9 @@ package minieditor;
 
 import minieditor.commands.RecordableCommand;
 
+/**
+ * Implementation of an EditorEngine.
+ */
 public class EditorEngineImpl implements EditorEngine {
 
 	private final StringBuilder buffer = new StringBuilder();

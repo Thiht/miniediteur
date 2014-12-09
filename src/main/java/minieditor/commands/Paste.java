@@ -4,8 +4,7 @@ import minieditor.EditorEngine;
 import minieditor.Memento;
 
 /**
- * Concrete command of the Command design pattern.
- * Originator of the Memento design pattern.
+ * A command allowing to paste the content of a clipboard.
  */
 public class Paste implements RecordableCommand {
 
@@ -15,6 +14,9 @@ public class Paste implements RecordableCommand {
 		this.receiver = receiver;
 	}
 
+	/**
+	 * Paste the clipboard's content of the specified EditorEngine.
+	 */
 	@Override
 	public void execute() {
 		receiver.paste();
