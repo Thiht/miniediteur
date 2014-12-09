@@ -1,5 +1,8 @@
 package minieditor;
 
+/**
+ * Implementation of an EditorEngine.
+ */
 public class EditorEngineImpl implements EditorEngine {
 
 	private StringBuilder buffer = new StringBuilder();

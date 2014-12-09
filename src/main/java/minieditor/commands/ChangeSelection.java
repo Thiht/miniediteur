@@ -3,6 +3,9 @@ package minieditor.commands;
 import minieditor.EditorEngine;
 import minieditor.UserInterface;
 
+/**
+ * A command allowing to change the selection in an EditorEngine.
+ */
 public class ChangeSelection implements Command {
 
 	private EditorEngine receiver;
@@ -13,6 +16,9 @@ public class ChangeSelection implements Command {
 		this.invoker  = invoker;
 	}
 
+	/**
+	 * Make the user interface ask the user for the new selection, and change it in the EditorEngine.
+	 */
 	@Override
 	public void execute() {
 		int beg = invoker.promptSelectionStart();

@@ -2,6 +2,9 @@ package minieditor;
 
 import minieditor.commands.Command;
 
+/**
+ * Operations of an user interface.
+ */
 public interface UserInterface {
 	/**
 	 * Ask the user for a command to run.

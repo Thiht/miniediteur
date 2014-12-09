@@ -12,6 +12,9 @@ import java.util.Scanner;
 
 import minieditor.commands.Command;
 
+/**
+ * Implementation of an UserInterface.
+ */
 public class UserInterfaceImpl implements UserInterface {
 
 	private HashMap<String, Command> commands = new HashMap<>();
@@ -66,6 +69,7 @@ public class UserInterfaceImpl implements UserInterface {
 				}
 			}
 		}
+
 		in.close();
 	}
 
@@ -119,6 +123,7 @@ public class UserInterfaceImpl implements UserInterface {
 				in.nextLine();
 			}
 		}
+
 		in.nextLine(); // Consume the \n character
 		return ret;
 	}
@@ -131,6 +136,7 @@ public class UserInterfaceImpl implements UserInterface {
 		if (terminate) {
 			throw new IllegalStateException("You must call the runInvokerLoop() method before calling this method");
 		}
+
 		out.println(text);
 	}
 

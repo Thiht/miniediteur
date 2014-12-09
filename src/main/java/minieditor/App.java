@@ -2,10 +2,17 @@ package minieditor;
 
 import minieditor.commands.*;
 
+/**
+ * The main class of the application.
+ */
 public class App {
 	private UserInterface invoker = new UserInterfaceImpl();
 	private EditorEngine receiver = new EditorEngineImpl();
 
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		App app = new App();
 		app.launch();
