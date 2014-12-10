@@ -4,6 +4,7 @@ import minieditor.commands.RecordableCommand;
 
 /**
  * Caretaker of the Memento pattern.
+ * Allow to record and replay a sequence of recordable commands.
  */
 public interface Recorder {
     /**
