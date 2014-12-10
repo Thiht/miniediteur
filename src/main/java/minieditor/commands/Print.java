@@ -5,8 +5,7 @@ import minieditor.Memento;
 import minieditor.UserInterface;
 
 /**
- * Concrete command of the Command design pattern.
- * Originator of the Memento design pattern.
+ * A command allowing to print the content of an EditorEngine.
  */
 public class Print implements RecordableCommand {
 
@@ -18,6 +17,9 @@ public class Print implements RecordableCommand {
 		this.invoker  = invoker;
 	}
 
+	/**
+	 * Retrieve the content of the specified EditorEngine and make the specified UserInterface print it.
+	 */
 	@Override
 	public void execute() {
 		String toPrint = receiver.getContent();

@@ -12,6 +12,9 @@ import java.util.Scanner;
 
 import minieditor.commands.Command;
 
+/**
+ * Implementation of an UserInterface.
+ */
 public class UserInterfaceImpl implements UserInterface {
 
 	private final HashMap<String, Command> commands = new HashMap<>();
@@ -120,6 +123,7 @@ public class UserInterfaceImpl implements UserInterface {
 				in.nextLine();
 			}
 		}
+
 		in.nextLine(); // Consume the \n character
 		return ret;
 	}

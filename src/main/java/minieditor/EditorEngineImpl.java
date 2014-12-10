@@ -4,6 +4,9 @@ import minieditor.commands.RecordableCommand;
 
 import java.util.Stack;
 
+/**
+ * Implementation of an EditorEngine.
+ */
 public class EditorEngineImpl implements EditorEngine {
 
 	private StringBuilder buffer = new StringBuilder();

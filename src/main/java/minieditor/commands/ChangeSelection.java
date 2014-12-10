@@ -4,6 +4,9 @@ import minieditor.EditorEngine;
 import minieditor.Memento;
 import minieditor.UserInterface;
 
+/**
+ * A command allowing to change the selection in an EditorEngine.
+ */
 public class ChangeSelection implements RecordableCommand {
 
 	private final EditorEngine receiver;
@@ -17,6 +20,9 @@ public class ChangeSelection implements RecordableCommand {
 		this.invoker  = invoker;
 	}
 
+	/**
+	 * Make the user interface ask the user for the new selection, and change it in the EditorEngine.
+	 */
 	@Override
 	public void execute() {
 		if (memento != null) { // If we're replaying a record
