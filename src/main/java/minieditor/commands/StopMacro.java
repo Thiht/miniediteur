@@ -2,6 +2,9 @@ package minieditor.commands;
 
 import minieditor.MacroRecorder;
 
+/**
+ * A command allowing to stop the record a macro.
+ */
 public class StopMacro implements Command {
 
     private final MacroRecorder receiver;

@@ -2,6 +2,9 @@ package minieditor.commands;
 
 import minieditor.MacroRecorder;
 
+/**
+ * A command allowing to replay a macro.
+ */
 public class ReplayMacro implements Command {
 
     private final MacroRecorder receiver;

@@ -2,6 +2,9 @@ package minieditor.commands;
 
 import minieditor.MacroRecorder;
 
+/**
+ * A command allowing to start the record a macro.
+ */
 public class StartMacro implements Command {
 
     private final MacroRecorder receiver;
